@@ -177,13 +177,18 @@
 /* ─── RSVP form ─────────────────────────────────────── */
 (function initRSVP() {
   const form          = document.getElementById('rsvp-form');
+  if (!form) return;
+
   const successPanel  = document.getElementById('rsvp-success');
   const successHeading = document.getElementById('success-heading');
   const successMsg    = document.getElementById('success-message');
   const againBtn      = document.getElementById('rsvp-again');
   const guestsGroup   = document.getElementById('guests-group');
   const dietaryGroup  = document.getElementById('dietary-group');
+  const statusEl      = document.getElementById('form-status');
+  const submitBtn     = form.querySelector('button[type="submit"]');
   const attendingRadios = form.querySelectorAll('input[name="attending"]');
+  const endpoint      = form.getAttribute('action');
 
   // ── Show/hide guest & dietary fields based on attendance ──
   function toggleAttendingFields() {
@@ -201,6 +206,35 @@
   // ── Validation helpers ──
   function setError(el, hasError) {
     el.classList.toggle('error', hasError);
+  }
+
+  function getCurrentLang() {
+    return localStorage.getItem('weddingLang') || 'en';
+  }
+
+  function t(key) {
+    const lang = getCurrentLang();
+    return translations[lang]?.[key] || translations.en?.[key] || '';
+  }
+
+  function showStatus(message, type) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.remove('hidden', 'is-error', 'is-success');
+    if (type) statusEl.classList.add(`is-${type}`);
+  }
+
+  function clearStatus() {
+    if (!statusEl) return;
+    statusEl.textContent = '';
+    statusEl.classList.add('hidden');
+    statusEl.classList.remove('is-error', 'is-success');
+  }
+
+  function setSubmitting(isSubmitting) {
+    if (!submitBtn) return;
+    submitBtn.disabled = isSubmitting;
+    submitBtn.textContent = isSubmitting ? t('form_submitting') : t('form_submit');
   }
 
   function validate() {
@@ -237,65 +271,108 @@
 
   // ── Clear error on input ──
   form.querySelectorAll('input, select, textarea').forEach(el => {
-    el.addEventListener('input', () => setError(el, false));
+    el.addEventListener('input', () => {
+      setError(el, false);
+      if (statusEl && !statusEl.classList.contains('hidden')) {
+        clearStatus();
+      }
+    });
   });
 
   // ── Submit ──
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     if (!validate()) return;
 
+    clearStatus();
+
+    const attendingValue = form.querySelector('input[name="attending"]:checked').value;
+    const attendingYes = attendingValue === 'yes';
     const data = {
       firstName: form.querySelector('#first-name').value.trim(),
       lastName:  form.querySelector('#last-name').value.trim(),
       email:     form.querySelector('#email').value.trim(),
-      attending: form.querySelector('input[name="attending"]:checked').value,
-      guests:    form.querySelector('#guests').value,
-      dietary:   form.querySelector('#dietary').value.trim(),
+      attending: attendingValue,
+      guests:    attendingYes ? form.querySelector('#guests').value : '0',
+      dietary:   attendingYes ? form.querySelector('#dietary').value.trim() : '',
       message:   form.querySelector('#message').value.trim(),
       timestamp: new Date().toISOString(),
     };
 
-    // Persist to localStorage so the response isn't lost on refresh
-    saveRSVP(data);
+    const formData = new FormData(form);
+    formData.set('attending', data.attending);
+    formData.set('guests', data.guests);
+    formData.set('dietary', data.dietary);
+    formData.set('message', data.message);
+    formData.set('submitted_at', data.timestamp);
 
-    // Get current language for success messages
-    const currentLang = localStorage.getItem('weddingLang') || 'en';
-    const isYes = data.attending === 'yes';
-    let heading, message;
+    try {
+      setSubmitting(true);
 
-    if (isYes) {
-      const headingKey = 'success_heading_yes';
-      heading = translations[currentLang][headingKey].replace('{name}', data.firstName);
-      
-      const guestKey = data.guests === '1' ? 'success_message_guests_1' : 'success_message_guests_n';
-      const guestText = data.guests === '1' 
-        ? translations[currentLang][guestKey]
-        : translations[currentLang][guestKey].replace('{count}', data.guests);
-      
-      const msgKey = 'success_message_yes';
-      message = translations[currentLang][msgKey].replace('{guests}', guestText);
-    } else {
-      const headingKey = 'success_heading_no';
-      heading = translations[currentLang][headingKey].replace('{name}', data.firstName);
-      const msgKey = 'success_message_no';
-      message = translations[currentLang][msgKey];
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        const errorMessage = Array.isArray(result.errors) && result.errors.length
+          ? result.errors.map((item) => item.message).join(' ')
+          : t('form_submit_error');
+        throw new Error(errorMessage);
+      }
+
+      // Persist to localStorage as a local backup after successful submission
+      saveRSVP(data);
+
+      // Get current language for success messages
+      const currentLang = getCurrentLang();
+      const isYes = data.attending === 'yes';
+      let heading, message;
+
+      if (isYes) {
+        const headingKey = 'success_heading_yes';
+        heading = translations[currentLang][headingKey].replace('{name}', data.firstName);
+        
+        const guestKey = data.guests === '1' ? 'success_message_guests_1' : 'success_message_guests_n';
+        const guestText = data.guests === '1' 
+          ? translations[currentLang][guestKey]
+          : translations[currentLang][guestKey].replace('{count}', data.guests);
+        
+        const msgKey = 'success_message_yes';
+        message = translations[currentLang][msgKey].replace('{guests}', guestText);
+      } else {
+        const headingKey = 'success_heading_no';
+        heading = translations[currentLang][headingKey].replace('{name}', data.firstName);
+        const msgKey = 'success_message_no';
+        message = translations[currentLang][msgKey];
+      }
+
+      successHeading.textContent = heading;
+      successMsg.textContent = message;
+
+      form.classList.add('hidden');
+      form.style.display = 'none';
+      successPanel.classList.remove('hidden');
+      successPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (error) {
+      showStatus(error.message || t('form_submit_error'), 'error');
+    } finally {
+      setSubmitting(false);
     }
-
-    successHeading.textContent = heading;
-    successMsg.textContent = message;
-
-    form.classList.add('hidden');
-    form.style.display = 'none';
-    successPanel.classList.remove('hidden');
-    successPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
   // ── Submit another response ──
   againBtn.addEventListener('click', function () {
     form.reset();
+    clearStatus();
     guestsGroup.classList.add('form-hidden');
     dietaryGroup.classList.add('form-hidden');
+    form.classList.remove('hidden');
     form.style.display = '';
     successPanel.classList.add('hidden');
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });

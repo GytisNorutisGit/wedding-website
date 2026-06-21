@@ -189,7 +189,8 @@
       <div class="divider-ornament">❧</div>
       <p class="rsvp-intro" data-key="rsvp_intro">Please let us know if you can make it by <strong>1st September 2026</strong>.</p>
 
-      <form id="rsvp-form" novalidate>
+      <form id="rsvp-form" action="https://formspree.io/f/xkolwejr" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New wedding RSVP" />
         <div class="form-row">
           <div class="form-group">
             <label for="first-name" data-key="form_first_name">First Name</label>
@@ -241,6 +242,7 @@
         </div>
 
         <button type="submit" class="btn btn-dark" data-key="form_submit">Send RSVP</button>
+        <p id="form-status" class="form-status hidden" aria-live="polite"></p>
         <p class="form-note" data-key="form_required">* Required fields</p>
       </form>
 

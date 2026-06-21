@@ -639,6 +639,7 @@ section:nth-child(odd):not(#hero) {
   border-radius: var(--radius);
   outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
+  appearance: none;
   -webkit-appearance: none;
 }
 
@@ -694,6 +695,25 @@ section:nth-child(odd):not(#hero) {
   color: var(--text-light);
   text-align: center;
   margin-top: 0.75rem;
+}
+
+.form-status {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.form-status.hidden {
+  display: none;
+}
+
+.form-status.is-error {
+  color: #b03a2e;
+}
+
+.form-status.is-success {
+  color: #2f6f44;
 }
 
 /* Hidden / shown based on attending selection */
