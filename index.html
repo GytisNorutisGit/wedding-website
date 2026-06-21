@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whitney &amp; Gytis | 24 November 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="locked">
+
+  <div id="passcode-gate" class="passcode-gate" role="dialog" aria-modal="true" aria-labelledby="passcode-title">
+    <div class="passcode-card">
+      <p class="passcode-tag">Private Wedding Access</p>
+      <h2 id="passcode-title">Enter Passcode</h2>
+      <p class="passcode-text">Please enter the invite passcode to view wedding details.</p>
+      <div class="passcode-form">
+        <input type="password" id="passcode-input" placeholder="Passcode" autocomplete="off" />
+        <button id="passcode-submit" class="btn btn-dark" type="button">Unlock Website</button>
+      </div>
+      <p id="passcode-error" class="passcode-error" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <ul>
+      <li><a href="#details" data-key="nav_details">Details</a></li>
+      <li><a href="#schedule" data-key="nav_schedule">Schedule</a></li>
+      <li><a href="#venue" data-key="nav_venue">Venue</a></li>
+      <li><a href="#rsvp" data-key="nav_rsvp">RSVP</a></li>
+      <li class="lang-selector">
+        <button id="lang-toggle" class="lang-btn">🌐 EN</button>
+        <div id="lang-menu" class="lang-menu hidden">
+          <button data-lang="en">English</button>
+          <button data-lang="fr">Français</button>
+          <button data-lang="lt">Lietuvių</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow" data-key="hero_eyebrow">Together Forever</p>
+      <h1>Whitney <span class="amp">&amp;</span> Gytis</h1>
+      <p class="hero-date">24 · November · 2026</p>
+      <p class="hero-venue">Cabra Castle, Co. Cavan, Ireland</p>
+      <a href="#rsvp" class="btn btn-light" data-key="hero_rsvp_btn">RSVP Now</a>
+    </div>
+    <!-- Countdown -->
+    <div id="countdown">
+      <div class="countdown-unit"><span id="days">--</span><label data-key="countdown_days">Days</label></div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-unit"><span id="hours">--</span><label data-key="countdown_hours">Hours</label></div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-unit"><span id="minutes">--</span><label data-key="countdown_minutes">Minutes</label></div>
+      <div class="countdown-sep">·</div>
+      <div class="countdown-unit"><span id="seconds">--</span><label data-key="countdown_seconds">Seconds</label></div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details">
+    <div class="section-inner">
+      <p class="section-tag" data-key="details_tag">The Big Day</p>
+      <h2 class="section-title" data-key="details_title">Wedding Details</h2>
+      <div class="divider-ornament">❧</div>
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="detail-icon">📅</div>
+          <h3 data-key="details_date_label">Date</h3>
+          <p data-key="details_date_val">Tuesday<br/>24th November 2026</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">🕑</div>
+          <h3 data-key="details_time_label">Ceremony</h3>
+          <p data-key="details_time_val">Begins at 2:00 PM</p>
+          <p class="detail-sub" data-key="details_time_sub">Reception to follow</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">🏰</div>
+          <h3 data-key="details_venue_label">Venue</h3>
+          <p data-key="details_venue_val">Cabra Castle</p>
+          <p class="detail-sub" data-key="details_venue_sub">Kingscourt, Co. Cavan<br/>Ireland, A82 EC64</p>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">🌿</div>
+          <h3 data-key="details_dress_label">Dress Code</h3>
+          <p data-key="details_dress_val">Black Tie Optional</p>
+          <p class="detail-sub" data-key="details_dress_sub">Smart evening attire</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <div class="section-inner">
+      <p class="section-tag" data-key="schedule_tag">Plan Your Day</p>
+      <h2 class="section-title" data-key="schedule_title">Day Schedule</h2>
+      <div class="divider-ornament">❧</div>
+      <ol class="timeline">
+        <li class="timeline-item">
+          <div class="timeline-time" data-key="schedule_1_time">1:30 PM</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4 data-key="schedule_1_title">Guests Arrive</h4>
+            <p data-key="schedule_1_text">Welcome drinks served in the castle grounds</p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <div class="timeline-time" data-key="schedule_2_time">2:00 PM</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4 data-key="schedule_2_title">Ceremony</h4>
+            <p data-key="schedule_2_text">Wedding ceremony in the castle</p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <div class="timeline-time" data-key="schedule_3_time">3:00 PM</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4 data-key="schedule_3_title">Drinks Reception</h4>
+            <p data-key="schedule_3_text">Champagne, canapés &amp; photography in the gardens</p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <div class="timeline-time" data-key="schedule_4_time">5:00 PM</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4 data-key="schedule_4_title">Wedding Breakfast</h4>
+            <p data-key="schedule_4_text">Dinner in the Courtroom Restaurant</p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <div class="timeline-time" data-key="schedule_5_time">8:00 PM</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4 data-key="schedule_5_title">Evening Reception</h4>
+            <p data-key="schedule_5_text">Dancing &amp; celebrations into the night</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section id="venue">
+    <div class="section-inner">
+      <p class="section-tag" data-key="venue_tag">Where to Find Us</p>
+      <h2 class="section-title" data-key="venue_title">The Venue</h2>
+      <div class="divider-ornament">❧</div>
+      <div class="venue-grid">
+        <div class="venue-info">
+          <h3 data-key="venue_name">Cabra Castle</h3>
+          <p data-key="venue_desc">Nestled on 100 acres of parklands and gardens in the heart of County Cavan, Cabra Castle is one of Ireland's most celebrated castle wedding venues. With its breathtaking period features and warm Irish hospitality, it sets the perfect scene for the beginning of our forever.</p>
+          <address data-key="venue_address">Carrickmacross Road<br/>Kingscourt, Co. Cavan<br/>Ireland, A82 EC64</address>
+          <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=53.9134653,-6.774428" target="_blank" rel="noopener" data-key="venue_directions_btn">Get Directions</a>
+
+          <div class="accommodation-note">
+            <h4 data-key="venue_stay_title">Staying Overnight?</h4>
+            <p data-key="venue_stay_text">Cabra Castle has 106 beautiful rooms on the estate. We recommend booking early! Mention the <strong>Whitney &amp; Gytis wedding</strong> when enquiring.</p>
+            <a href="https://cabracastle.com" target="_blank" rel="noopener" class="link-inline" data-key="venue_stay_link">Visit Cabra Castle →</a>
+          </div>
+        </div>
+        <div class="venue-map">
+          <iframe
+            title="Cabra Castle Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.0!2d-6.774428!3d53.9134653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485c1b6e4f000001%3A0x1!2sCabra+Castle%2C+Kingscourt%2C+Co.+Cavan!5e0!3m2!1sen!2sie!4v1"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp">
+    <div class="section-inner">
+      <p class="section-tag" data-key="rsvp_tag">Join Us</p>
+      <h2 class="section-title" data-key="rsvp_title">RSVP</h2>
+      <div class="divider-ornament">❧</div>
+      <p class="rsvp-intro" data-key="rsvp_intro">Please let us know if you can make it by <strong>1st September 2026</strong>.</p>
+
+      <form id="rsvp-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name" data-key="form_first_name">First Name</label>
+            <input type="text" id="first-name" name="first_name" data-placeholder="form_first_name" placeholder="Your first name" required />
+          </div>
+          <div class="form-group">
+            <label for="last-name" data-key="form_last_name">Last Name</label>
+            <input type="text" id="last-name" name="last_name" data-placeholder="form_last_name" placeholder="Your last name" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" data-key="form_email">Email Address</label>
+          <input type="email" id="email" name="email" data-placeholder="form_email_placeholder" placeholder="you@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label data-key="form_attending">Will you be attending?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="attending" value="yes" required />
+              <span data-key="form_yes">Joyfully accepts</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="attending" value="no" />
+              <span data-key="form_no">Regretfully declines</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="guests-group">
+          <label for="guests" data-key="form_guests">Number of Guests (including yourself)</label>
+          <select id="guests" name="guests">
+            <option value="1" data-key="form_guests_1">1 — Just me</option>
+            <option value="2" data-key="form_guests_2">2 — Me + 1</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dietary-group">
+          <label for="dietary" data-key="form_dietary">Dietary Requirements</label>
+          <textarea id="dietary" name="dietary" data-placeholder="form_dietary_placeholder" rows="3" placeholder="Please list any dietary requirements or allergies for all guests in your party"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="message" data-key="form_message">Message to the Couple</label>
+          <textarea id="message" name="message" data-placeholder="form_message_placeholder" rows="3" placeholder="Leave a kind word for Whitney &amp; Gytis…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-dark" data-key="form_submit">Send RSVP</button>
+        <p class="form-note" data-key="form_required">* Required fields</p>
+      </form>
+
+      <!-- Success state -->
+      <div id="rsvp-success" class="rsvp-success hidden">
+        <div class="success-icon">🌸</div>
+        <h3 id="success-heading">Thank you!</h3>
+        <p id="success-message"></p>
+        <button class="btn btn-outline" id="rsvp-again" data-key="success_again_btn">Submit another response</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <h2>Whitney <span class="amp">&amp;</span> Gytis</h2>
+    <p data-key="footer_text">24 · November · 2026 &nbsp;|&nbsp; Cabra Castle, Ireland</p>
+    <p class="footer-note" data-key="footer_note">Made with love ♡</p>
+  </footer>
+
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
