@@ -295,7 +295,6 @@
       attending: attendingValue,
       guests:    attendingYes ? form.querySelector('#guests').value : '0',
       dietary:   attendingYes ? form.querySelector('#dietary').value.trim() : '',
-      message:   form.querySelector('#message').value.trim(),
       timestamp: new Date().toISOString(),
     };
 
@@ -303,7 +302,6 @@
     formData.set('attending', data.attending);
     formData.set('guests', data.guests);
     formData.set('dietary', data.dietary);
-    formData.set('message', data.message);
     formData.set('submitted_at', data.timestamp);
 
     try {
