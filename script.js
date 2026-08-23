@@ -67,8 +67,8 @@
     if (!key || !translations[currentLang] || !translations[currentLang][key]) return;
 
     const text = translations[currentLang][key];
-    // Check if element has HTML content (contains <br/>, <strong>, etc)
-    if (text.includes('<')) {
+    // Check if element has HTML content (tags or entities like <br/>, <strong>, &nbsp;)
+    if (text.includes('<') || text.includes('&')) {
       el.innerHTML = text;
     } else {
       el.textContent = text;
