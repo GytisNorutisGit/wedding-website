@@ -679,7 +679,7 @@ section:nth-child(odd):not(#hero) {
   margin-bottom: 1.25rem;
 }
 
-.form-group label:first-child {
+.form-group > label:first-child {
   display: block;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
