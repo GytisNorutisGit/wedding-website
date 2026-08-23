@@ -183,24 +183,21 @@
   const successHeading = document.getElementById('success-heading');
   const successMsg    = document.getElementById('success-message');
   const againBtn      = document.getElementById('rsvp-again');
-  const guestsGroup   = document.getElementById('guests-group');
   const dietaryGroup  = document.getElementById('dietary-group');
   const statusEl      = document.getElementById('form-status');
   const submitBtn     = form.querySelector('button[type="submit"]');
   const attendingRadios = form.querySelectorAll('input[name="attending"]');
   const endpoint      = form.getAttribute('action');
 
-  // ── Show/hide guest & dietary fields based on attendance ──
+  // ── Show/hide dietary field based on attendance ──
   function toggleAttendingFields() {
     const attending = form.querySelector('input[name="attending"]:checked');
     const isYes = attending && attending.value === 'yes';
-    guestsGroup.classList.toggle('form-hidden', !isYes);
     dietaryGroup.classList.toggle('form-hidden', !isYes);
   }
 
   attendingRadios.forEach(r => r.addEventListener('change', toggleAttendingFields));
   // Initialise — hide until selected
-  guestsGroup.classList.add('form-hidden');
   dietaryGroup.classList.add('form-hidden');
 
   // ── Validation helpers ──
@@ -293,14 +290,12 @@
       lastName:  form.querySelector('#last-name').value.trim(),
       email:     form.querySelector('#email').value.trim(),
       attending: attendingValue,
-      guests:    attendingYes ? form.querySelector('#guests').value : '0',
       dietary:   attendingYes ? form.querySelector('#dietary').value.trim() : '',
       timestamp: new Date().toISOString(),
     };
 
     const formData = new FormData(form);
     formData.set('attending', data.attending);
-    formData.set('guests', data.guests);
     formData.set('dietary', data.dietary);
     formData.set('submitted_at', data.timestamp);
 
@@ -335,14 +330,8 @@
       if (isYes) {
         const headingKey = 'success_heading_yes';
         heading = translations[currentLang][headingKey].replace('{name}', data.firstName);
-        
-        const guestKey = data.guests === '1' ? 'success_message_guests_1' : 'success_message_guests_n';
-        const guestText = data.guests === '1' 
-          ? translations[currentLang][guestKey]
-          : translations[currentLang][guestKey].replace('{count}', data.guests);
-        
         const msgKey = 'success_message_yes';
-        message = translations[currentLang][msgKey].replace('{guests}', guestText);
+        message = translations[currentLang][msgKey];
       } else {
         const headingKey = 'success_heading_no';
         heading = translations[currentLang][headingKey].replace('{name}', data.firstName);
@@ -368,7 +357,6 @@
   againBtn.addEventListener('click', function () {
     form.reset();
     clearStatus();
-    guestsGroup.classList.add('form-hidden');
     dietaryGroup.classList.add('form-hidden');
     form.classList.remove('hidden');
     form.style.display = '';

@@ -30,6 +30,7 @@
       <li><a href="#details" data-key="nav_details">Details</a></li>
       <li><a href="#schedule" data-key="nav_schedule">Schedule</a></li>
       <li><a href="#venue" data-key="nav_venue">Venue</a></li>
+      <li><a href="#accommodation" data-key="nav_accommodation">Stay</a></li>
       <li><a href="#rsvp" data-key="nav_rsvp">RSVP</a></li>
       <li class="lang-selector">
         <button id="lang-toggle" class="lang-btn">🌐 EN</button>
@@ -181,6 +182,17 @@
     </div>
   </section>
 
+  <!-- ACCOMMODATION -->
+  <section id="accommodation">
+    <div class="section-inner accommodation-inner">
+      <p class="section-tag" data-key="accommodation_tag">Where to Stay</p>
+      <h2 class="section-title" data-key="accommodation_title">Reserve Your Stay</h2>
+      <div class="divider-ornament">❧</div>
+      <p class="accommodation-desc" data-key="accommodation_desc">Cabra Castle has 106 beautiful rooms on the estate, and we recommend booking early. Use the link below to reserve your room directly with the castle for our wedding.</p>
+      <a class="btn btn-dark" href="https://www.cabracastle.com/weddings-venues/weddings-guest-reserve-your-stay" target="_blank" rel="noopener" data-key="accommodation_btn">Reserve Your Stay →</a>
+    </div>
+  </section>
+
   <!-- RSVP -->
   <section id="rsvp">
     <div class="section-inner">
@@ -221,19 +233,9 @@
           </div>
         </div>
 
-        <div class="form-group" id="guests-group">
-          <label for="guests" data-key="form_guests">Number of Guests (including yourself)</label>
-          <select id="guests" name="guests">
-            <option value="1" data-key="form_guests_1">1 — Just me</option>
-            <option value="2" data-key="form_guests_2">2 — Me + 1</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </div>
-
         <div class="form-group" id="dietary-group">
           <label for="dietary" data-key="form_dietary">Dietary Requirements</label>
-          <textarea id="dietary" name="dietary" data-placeholder="form_dietary_placeholder" rows="3" placeholder="Please list any dietary requirements or allergies for all guests in your party"></textarea>
+          <textarea id="dietary" name="dietary" data-placeholder="form_dietary_placeholder" rows="3" placeholder="Please list any dietary requirements or allergies"></textarea>
         </div>
 
         <button type="submit" class="btn btn-dark" data-key="form_submit">Send RSVP</button>
