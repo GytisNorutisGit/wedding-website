@@ -601,6 +601,12 @@ section:nth-child(odd):not(#hero) {
 .accommodation-desc {
   font-size: 1.02rem;
   color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.accommodation-code {
+  font-size: 0.95rem;
+  color: var(--gold-dark);
   margin-bottom: 1.75rem;
 }
 
