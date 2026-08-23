@@ -291,12 +291,14 @@
       email:     form.querySelector('#email').value.trim(),
       attending: attendingValue,
       dietary:   attendingYes ? form.querySelector('#dietary').value.trim() : '',
+      message:   form.querySelector('#message').value.trim(),
       timestamp: new Date().toISOString(),
     };
 
     const formData = new FormData(form);
     formData.set('attending', data.attending);
     formData.set('dietary', data.dietary);
+    formData.set('message', data.message);
     formData.set('submitted_at', data.timestamp);
 
     try {
