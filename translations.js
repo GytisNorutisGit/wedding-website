@@ -84,7 +84,6 @@ const translations = {
     success_message_no: 'Thank you for letting us know. We\'re sad you won\'t be able to make it, but we appreciate you taking the time to respond. We\'ll be thinking of you on the day! 💛',
     success_again_btn: 'Submit another response',
     footer_text: '24 · November · 2026 &nbsp;|&nbsp; Cabra Castle, Ireland',
-    footer_note: 'Made with love ♡',
   },
   fr: {
     nav_details: 'Détails',
@@ -171,7 +170,6 @@ const translations = {
     success_message_no: 'Merci de nous le faire savoir. Nous sommes déçus que vous ne puissiez pas venir, mais nous apprécions que vous ayez pris le temps de répondre. Nous penserons à vous ce jour-là! 💛',
     success_again_btn: 'Soumettre une autre réponse',
     footer_text: '24 · novembre · 2026 &nbsp;|&nbsp; Château de Cabra, Irlande',
-    footer_note: 'Avec amour ♡',
   },
   lt: {
     nav_details: 'Detalės',
@@ -258,6 +256,5 @@ const translations = {
     success_message_no: 'Dėkojame, kad mus informavote. Mus liūdi, kad negalite dalyvauti, tačiau labai brangiai vertinams, jog radote laiko atsakyti. Šią dieną kaip galime, galvosime apie jus! 💛',
     success_again_btn: 'Pateikti kitą atsakymą',
     footer_text: '24 · lapkricis · 2026 &nbsp;|&nbsp; Cabra pilis, Airija',
-    footer_note: 'Su meile ♡',
   }
 };
