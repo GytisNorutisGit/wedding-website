@@ -706,6 +706,8 @@ section:nth-child(odd):not(#hero) {
   height: 18px;
   accent-color: var(--gold-dark);
   flex-shrink: 0;
+  appearance: auto;
+  -webkit-appearance: radio;
 }
 
 .form-note {
